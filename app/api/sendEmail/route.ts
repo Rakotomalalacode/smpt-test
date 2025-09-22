@@ -58,11 +58,18 @@ export async function POST(request: Request) {
 
     // Configuration de Nodemailer
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT),
+      secure: false, // true si port 465
       auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_PASS,
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
       },
+      // service: 'gmail',
+      // auth: {
+      //   user: process.env.GMAIL_USER,
+      //   pass: process.env.GMAIL_PASS,
+      // },
     });
 
     // Résolution de la promesse retournée par `render`
